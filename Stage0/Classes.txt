@@ -1,0 +1,40 @@
+Ball:
+    - speed
+    - direction
+    - texture
+    - color
+    - position
+    + increaseSpeed()
+    + updateDirection()
+    + updateTexture()
+    + updateColor()
+
+Board:
+    - background
+    - height
+    - width
+    + changeBackground()
+    + changeHeight()
+    + changeWidth()
+
+Paddle:
+    - texture
+    - color
+    - direction
+    - position
+    + listenTo()
+    + movePaddle()
+
+scoreCounter:
+    - player1 score
+    - player2 score
+    + detectWallHit()
+    + increamentScore()
+
+Game:
+    - Ball
+    - Board
+    - Paddle1
+    - Paddle2
+    - scoreCounter
+    + startGame()

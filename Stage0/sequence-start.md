@@ -2,21 +2,31 @@
 
 ## Startup Sequence
 
-1) Game will load with MainPage and coin collector will start listening to
-coin inserted event.
-2) After first coin insertion, GameMode page gets loaded with ability for 
-player 1 to select the appropriate game mode
-3) After game mode selection, Main menu page is loaded with ability for
-player 1 to start game or make setting changes.
-4) When player 1 selects start game, actual game loads up.
+1) When the StartGame module is triggered, all the paddles,
+balls and score counter are initialized with the starting positions & values.
+
+2) All the event handlers like ControllerEventListener, PaddleEventHandler,
+CollisionEventHandler, and BallEventHandler are triggered.
+
+3) Ball starts moving with the set initial speed in the default direction.
 
 ## Movement Initiation
 
-1) Player 1 bat will listen to player 1 controller
-2) Player 2 bat will listen to player 2 controller
-3) Player 1 bat moves according to its controller movements
-4) Player 2 bat moves according to its controller movements
-5) Number of non scoring cycles will determine the ball speed between bats
-6) If ball hits any of the walls, the score of the opponent increases accordingly
-7) If any of the player reaches score of 7, he is declared winner and game 
-redirects to MainPage
+1) ControllerEventListeners of corresponding Paddles, listen to controller events
+and raise events to the PaddleEventHandlers
+
+2) PaddleEventHandlers update the direction of paddles considering the assigned
+direction of paddles
+
+3) CollisionEventHandler continuously listens for collisions by fetching positions
+of paddles and the ball. If there is a collision with paddles, it will raise the
+corresponding event to BallEventHandler. Else, if there is a collision with wall,
+it will raise event to scoreCounter.
+
+## One score
+
+1) When the scoreCounter receives the update score event, it will update the
+score of the corresponding player.
+
+2) If any of the player scores the maximum score, he is declared winner
+and program quits.
